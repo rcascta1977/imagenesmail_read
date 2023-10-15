@@ -1,0 +1,14 @@
+__pycache__
+*/__pycache__
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+dist/
+src/ImagenesMain_rcanessa.egg-info
+tests/
+src/ImagenesMail_rcanessa.egg-info
+docs/build/*
+
+
+!docs/build/index.txt
