@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath("../../src/"))
 project = 'ImagenesMail_rcanessa'
 copyright = '2023, Raul Canessa Castaneda'
 author = 'Raul Canessa Castaneda'
-release = '0.0.2'
+release = '0.0.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

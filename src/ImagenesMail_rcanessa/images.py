@@ -14,7 +14,6 @@ def showImageFromURL(url:str)-> None:
     archivo_imagen=requests.get(url,stream=True)
     with Image.open(archivo_imagen.raw) as imagen:
         imagen.show()
-        return(imagen)
 
 def downloadImageFromUrl(url:str, path:str)-> None:
     """

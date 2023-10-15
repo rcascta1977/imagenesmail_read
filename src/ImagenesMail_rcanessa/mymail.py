@@ -1,4 +1,5 @@
 
+import threading
 #Estas bibliotecas permiten hacer la conexión al servidor y el correo usado para el envío
 import ssl
 import smtplib
@@ -28,17 +29,21 @@ def sendQuickMail(subject:str, message:str, destination:str) -> None:
     mensaje["Subject"] = subject
     mensaje["From"] = correo_envio
     mensaje["To"] = destination
-    mensaje["Cc"] = "jazminmonge@gmail.com"
+    mensaje["Cc"] = "rcanessaccr@yahoo.com"
 
     context = ssl.create_default_context()
-    with smtplib.SMTP("smtp.gmail.com", 587) as conexion:
-       conexion.ehlo()
-       conexion.starttls(context=context)
-       conexion.ehlo()
-       conexion.login(correo_envio, password)
-       respuesta=conexion.sendmail(correo_envio, destination, message)
+    def envio_correo(message,destination):
+        with smtplib.SMTP("smtp.gmail.com", 587) as conexion:
+            conexion.ehlo()
+            conexion.starttls(context=context)
+            conexion.ehlo()
+            conexion.login(correo_envio, password)
+            respuesta=conexion.sendmail(correo_envio, destination, message)
+            print(respuesta)
    
-    print(respuesta)
+    hilo1=threading.Thread(target=envio_correo, args=(message,destination))
+    hilo1.start()
+    hilo1.join()
 
 def sendAttachEmail(subject:str, message:str, destination:str, path:str)-> None:
     """
@@ -84,11 +89,16 @@ def sendAttachEmail(subject:str, message:str, destination:str, path:str)-> None:
     mensaje.attach(adjunto)
 
     context = ssl.create_default_context()
-    with smtplib.SMTP("smtp.gmail.com", 587) as conexion:
-       conexion.ehlo()
-       conexion.starttls(context=context)
-       conexion.ehlo()
-       conexion.login(correo_envio, password)
-       respuesta=conexion.sendmail(correo_envio, destination, mensaje.as_string())
-    print(respuesta)
+    def envio_correo_adjunto(destination):
+        with smtplib.SMTP("smtp.gmail.com", 587) as conexion:
+            conexion.ehlo()
+            conexion.starttls(context=context)
+            conexion.ehlo()
+            conexion.login(correo_envio, password)
+            respuesta=conexion.sendmail(correo_envio, destination, mensaje.as_string())
+            print(respuesta)
+
+    hilo2=threading.Thread(target=envio_correo_adjunto, args=(destination,))
+    hilo2.start()
+    hilo2.join()
 

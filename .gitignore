@@ -6,7 +6,8 @@ Scripts/
 pyvenv.cfg
 dist/
 src/ImagenesMain_rcanessa.egg-info
-tests/
+src/ImagenesMail_rcanessa/funcionesutiles.py
+src/ImagenesMail_rcanessa/mensajes.py
 src/ImagenesMail_rcanessa.egg-info
 docs/build/*
 
